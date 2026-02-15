@@ -1,0 +1,26 @@
+[
+  {
+    "id": "inv-001",
+    "binId": "bin-001",
+    "feedType": "Corn",
+    "quantity": 5000,
+    "entryDate": "2024-02-14T09:00:00Z",
+    "notes": "Regular delivery"
+  },
+  {
+    "id": "inv-002",
+    "binId": "bin-001", 
+    "feedType": "Soybean",
+    "quantity": 3000,
+    "entryDate": "2024-02-13T14:30:00Z",
+    "notes": "Supplemental feed"
+  },
+  {
+    "id": "inv-003",
+    "binId": "bin-002",
+    "feedType": "Corn",
+    "quantity": 4000,
+    "entryDate": "2024-02-14T08:15:00Z",
+    "notes": "Monthly restock"
+  }
+]
