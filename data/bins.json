@@ -4,12 +4,12 @@
     "name": "Main Storage Bin",
     "location": "North Farm",
     "capacity": 50000,
-    "currentLevel": 35000,
+    "currentLevel": 40000,
     "lastUpdated": "2024-02-14T10:30:00Z",
-    "status": "normal"
+    "status": "low"
   },
   {
-    "id": "bin-002", 
+    "id": "bin-002",
     "name": "Secondary Storage",
     "location": "South Farm",
     "capacity": 30000,
