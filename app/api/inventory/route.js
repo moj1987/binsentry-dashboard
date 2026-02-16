@@ -1,4 +1,4 @@
-import { getInventory, addInventory} from '../../../lib/data'
+import { getInventory, addInventory, updateInventory} from '../../../lib/data'
 
 export async function GET(){
     try{
@@ -37,5 +37,24 @@ export async function POST(request) {
              { error: 'Failed to create inventory item' },
              { status: 500 }
         );
+    }
+}
+
+export async function PUT(request){
+    try{
+        const {id, ...updateData} = await request.json();
+        if(!id){
+            return Response.json({ error: 'Missing item id' }, { status: 400 });
+        }
+
+        const result = await updateInventory(id, updateData)
+
+        if (!result.success){
+            return Response.json({error: result.error}, {status:404})
+        }
+
+        return Response.json(result.data)
+    }catch(error){
+        return Response.json({error:'Failed to update inventory'}, {status:500})
     }
 }

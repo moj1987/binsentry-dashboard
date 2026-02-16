@@ -3,9 +3,9 @@
     "id": "inv-001",
     "binId": "bin-001",
     "feedType": "Corn",
-    "quantity": 5000,
+    "quantity": 7000,
     "entryDate": "2024-02-14T09:00:00Z",
-    "notes": "Regular delivery"
+    "notes": "Updated via PUT"
   },
   {
     "id": "inv-002",
