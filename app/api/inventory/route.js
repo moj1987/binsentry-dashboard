@@ -1,4 +1,4 @@
-import { getInventory, addInventory, updateInventory} from '../../../lib/data'
+import { getInventory, addInventory, updateInventory, deleteInventory} from '../../../lib/data'
 
 export async function GET(){
     try{
@@ -56,5 +56,25 @@ export async function PUT(request){
         return Response.json(result.data)
     }catch(error){
         return Response.json({error:'Failed to update inventory'}, {status:500})
+    }
+}
+
+
+export async function DELETE(request){
+    try{
+        const {id} = await request.json();
+        if(!id){
+            return Response.json({ error: 'Missing item id' }, { status: 400 });
+        }
+
+        const result = await deleteInventory(id)
+
+        if (!result.success){
+            return Response.json({error: result.error}, {status:404})
+        }
+
+        return Response.json(result)
+    }catch(error){
+        return Response.json({error:'Failed to delete inventory'}, {status:500})
     }
 }
