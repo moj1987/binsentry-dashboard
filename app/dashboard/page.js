@@ -1,16 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import BinLevelChart from '../../components/charts/BinLevelChart';
 
 export default function Dashboard() {
   const [bins, setBins] = useState([]);
   const [inventory, setInventory] = useState([]);
-
-  useEffect(() => {
-    fetchBins();
-    fetchInventory();
-  }, []);
 
   const fetchBins = async () => {
     const response = await fetch('/api/bins');
@@ -24,8 +19,14 @@ export default function Dashboard() {
     setInventory(data);
   };
 
+  useEffect(() => {
+    fetchBins();
+    fetchInventory();
+  }, []);
+
   return (
     <div className="p-8">
+      <BinLevelChart data={bins} />
       <h1 className="text-3xl font-bold mb-8">BinSentry Dashboard</h1>
       
       <div className="grid grid-cols-2 gap-8">
