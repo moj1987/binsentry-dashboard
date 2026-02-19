@@ -3,8 +3,7 @@
 import { useState } from 'react';
 
 export default function BinUpdateForm({ bin, onUpdate }) {
-  const [currentLevel, setCurrentLevel] = useState(bin.currentLevel);
-  const [status, setStatus] = useState(bin.status);
+  const [currentLevel, setCurrentLevel] = useState(bin.level);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -20,11 +19,12 @@ export default function BinUpdateForm({ bin, onUpdate }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: bin.id,
-          currentLevel: parseInt(currentLevel),
-          status: status,
-          lastUpdated: new Date().toISOString()
-        }),
+        id: bin.id,
+        name: bin.name,
+        level: parseInt(currentLevel),
+        location: bin.location, 
+        lastUpdated: new Date().toISOString()
+      }),
       });
 
       if (response.ok) {
@@ -59,21 +59,6 @@ export default function BinUpdateForm({ bin, onUpdate }) {
             required
           />
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Status</label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="w-full p-2 border rounded"
-          >
-            <option value="normal">Normal</option>
-            <option value="low">Low</option>
-            <option value="critical">Critical</option>
-            <option value="full">Full</option>
-          </select>
-        </div>
-
         <button
           type="submit"
           disabled={loading}

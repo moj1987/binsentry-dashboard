@@ -26,7 +26,7 @@ export default function BinLevelChart({ data }) {
     labels: data.map(item => item.name),
     datasets: [{
       label: 'Bin Level',
-      data: data.map(item => item.currentLevel),
+      data: data.map(item => item.level),
       backgroundColor: 'rgba(59, 130, 246, 0.5)',
       borderColor: 'rgba(59, 130, 246, 1)',
       borderWidth: 2,

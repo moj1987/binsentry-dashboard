@@ -33,7 +33,6 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <ProtectedRoute>
       <div className="p-8">
         {/* Header with logout */}
         <div className="flex justify-between items-center mb-8">
@@ -118,6 +117,5 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
   );
 }
