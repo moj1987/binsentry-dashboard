@@ -12,6 +12,17 @@ export default function Dashboard() {
   const [inventory, setInventory] = useState([]);
   const { user, logout } = useAuth();
 
+  const formatDate = (dateString) => {
+    if (!dateString) return 'No date available';
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return 'Invalid date';
+      return date.toLocaleString();
+    } catch {
+      return 'Invalid date';
+    }
+  };
+
   const fetchBins = async () => {
     const response = await fetch('/api/bins');
     const data = await response.json();
@@ -49,14 +60,14 @@ export default function Dashboard() {
         </div>
         
         {/* Chart Section */}
-        <div className="mb-8">
+        <div className="mb-6" style={{ height: '300px', maxHeight: '40vh' }}>
           <BinLevelChart data={bins} />
         </div>
         
         {/* Forms Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
           <div>
-            <h2 className="text-xl font-semibold mb-4">Update Bin Level</h2>
+            <h2 className="text-xl font-semibold mb-2">Update Bin Level</h2>
             {bins.length > 0 && (
               <BinUpdateForm 
                 bin={bins[0]} 
@@ -69,7 +80,7 @@ export default function Dashboard() {
           </div>
           
           <div>
-            <h2 className="text-xl font-semibold mb-4">Add Inventory</h2>
+            <h2 className="text-xl font-semibold mb-2">Add Inventory</h2>
             <InventoryForm 
               bins={bins} 
               onAdd={() => {
@@ -81,10 +92,10 @@ export default function Dashboard() {
         </div>
         
         {/* Data Display Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Feed Bins</h2>
-            <div className="space-y-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-1">
+            <h2 className="text-xl font-semibold mb-2">Feed Bins</h2>
+            <div className="space-y-2 max-h-80 overflow-y-auto">
               {bins.map(bin => (
                 <div key={bin.id} className="border p-4 rounded">
                   <h3>{bin.name}</h3>
@@ -92,16 +103,16 @@ export default function Dashboard() {
                   <p>Level: {bin.currentLevel}/{bin.capacity}</p>
                   <p>Status: {bin.status}</p>
                   <p className="text-sm text-gray-500">
-                    Updated: {new Date(bin.lastUpdated).toLocaleString()}
+                    Updated: {formatDate(bin.lastUpdated)}
                   </p>
                 </div>
               ))}
             </div>
           </div>
           
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Inventory</h2>
-            <div className="space-y-2">
+          <div className="lg:col-span-2">
+            <h2 className="text-xl font-semibold mb-2">Inventory</h2>
+            <div className="space-y-2 max-h-80 overflow-y-auto">
               {inventory.map(item => (
                 <div key={item.id} className="border p-4 rounded">
                   <h3>{item.feedType}</h3>
@@ -109,7 +120,7 @@ export default function Dashboard() {
                   <p>Bin: {item.binId}</p>
                   <p>{item.notes}</p>
                   <p className="text-sm text-gray-500">
-                    Added: {new Date(item.entryDate).toLocaleString()}
+                    Added: {formatDate(item.entryDate)}
                   </p>
                 </div>
               ))}

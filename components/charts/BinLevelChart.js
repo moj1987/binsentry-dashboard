@@ -35,6 +35,7 @@ export default function BinLevelChart({ data }) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
